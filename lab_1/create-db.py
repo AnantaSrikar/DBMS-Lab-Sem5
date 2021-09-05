@@ -1,6 +1,14 @@
+"""
+	Script to create a new database with tables, in MySQL
+
+	Author: Srikar
+"""
+
 import mysql.connector
 import os
+from getpass import getuser
 
+# Initial data for table Students
 Students = {
 	'names': ["dwayne", "john", "dave", "randy", "kane", "tom"],
 	'rollnos': [33, 58, 27, 56, 11, 50],
@@ -12,14 +20,51 @@ Students = {
 	'sports': [55, 67, 77, 98, 73, 81]
 }
 
-mydb = mysql.connector.connect(
-	host="localhost",
-	user="srikar",
-	password=f"{os.environ['SQL_P']}",
-	database="university_profile"
-)
+# Initial data for table Campus
+Campus = {
+	'names': ["mec", "muc", "mgt"],
+	'cid': [101, 104, 107],
+	'loc': ['hyd', 'mad', 'bom'],
+	'cap': [1000, 2000, 1500],
+	'law': [1, 0, 1],
+	'engg': [1, 1, 0],
+	'buss': [1, 1, 1]
+}
+
+# Connect to given db
+def connectDB(dbName):
+	mydb = mysql.connector.connect(
+		host="localhost",
+		user=getuser(),
+		password=f"{os.environ['SQL_P']}",
+		database="university_profile"
+	)
+	return mydb
+
+hasDB = False
+
+# Try to connect to university_profile
+try:
+	mydb = connectDB("university_profile")
+	hasDB = True
+
+# Database doesn't exist, make one
+except mysql.connector.errors.ProgrammingError:
+	mydb = mysql.connector.connect(
+		host="localhost",
+		user=getuser(),
+		password=f"{os.environ['SQL_P']}"
+		)
+
+	mycursor = mydb.cursor()
+
+	mycursor.execute("CREATE DATABASE university_profile")
 
 mycursor = mydb.cursor()
+
+# Connect to db if not connected
+if not hasDB:
+	mycursor.execute("USE university_profile")
 
 mycursor.execute("""CREATE TABLE IF NOT EXISTS Student (
 	name CHAR(20),
@@ -59,16 +104,6 @@ mycursor.execute("""CREATE TABLE IF NOT EXISTS Campus (
 	buss BOOLEAN
 	);
 	""")
-
-Campus = {
-	'names': ["mec", "muc", "mgt"],
-	'cid': [101, 104, 107],
-	'loc': ['hyd', 'mad', 'bom'],
-	'cap': [1000, 2000, 1500],
-	'law': [1, 0, 1],
-	'engg': [1, 1, 0],
-	'buss': [1, 1, 1]
-}
 
 try:
 	for i in range(3):
