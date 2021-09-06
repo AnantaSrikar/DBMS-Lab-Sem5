@@ -1,8 +1,8 @@
 -- q11
-select name, (math+sci+eng+social+sports)/5 as avg from Student order by avg desc limit 1;
+SELECT name, (math+sci+eng+social+sports)/5 AS avg FROM Student ORDER BY avg DESC LIMIT 1;
 
 -- q12
-select name from Student where substr(name, 2, 1)='a';
+SELECT name FROM Student WHERE substr(name, 2, 1)='a';
 
 -- q13
-select name, math from Student order by math;
+SELECT name, math FROM Student ORDER BY math;

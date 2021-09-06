@@ -11,7 +11,7 @@ SELECT name, rollno FROM Student WHERE math > 80 OR sci > 80;
 SELECT DISTINCT social FROM Student;
 
 -- q5
-SELECT count(name) FROM Student WHERE eng < 70;
+SELECT count(name) AS failing FROM Student WHERE eng < 70;
 
 -- q6
 SELECT * FROM Student ORDER BY math+sci DESC LIMIT 1;
@@ -26,6 +26,6 @@ SELECT sum(case when engg=1 then cap else 0 end) AS stem, sum(case when engg=0 t
 SELECT * FROM Student WHERE math > 70 AND  sci > 70 AND  eng > 70 AND  social > 70 AND sports > 70;
 
 -- q10
-SELECT count(*) FROM Student WHERE rollno >= 1 AND rollno <= 20;
-SELECT count(*) FROM Student WHERE rollno >= 21 AND rollno <= 40;
-SELECT count(*) FROM Student WHERE rollno >= 41 AND rollno <= 60;
+SELECT count(*) AS grp1 FROM Student WHERE rollno >= 1 AND rollno <= 20;
+SELECT count(*) AS grp2 FROM Student WHERE rollno >= 21 AND rollno <= 40;
+SELECT count(*) AS grp3 FROM Student WHERE rollno >= 41 AND rollno <= 60;
