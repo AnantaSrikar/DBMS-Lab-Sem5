@@ -1,6 +1,6 @@
-SELECT name, dob, DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(dob, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(dob, '00-%m-%d')) AS age from Student having age > 17 order by age desc;
-select count(case when gender='M' then 1 end) AS male_cnt, count(case when gender='F' then 1 end) AS female_cnt FROM Student WHERE DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(dob, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(dob, '00-%m-%d')) > 19;
-select count(*) from Student where math > (select (avg(math)+avg(sci)+avg(eng)+avg(social)+avg(sports))/5 from Student);
--- todo: FIX ;-; => select count(case when SUBSTR(pincode, 1, 1)='6' or SUBSTR(name, 1, 1)='5' then 1 end) as south, count(case when SUBSTR(pincode, 1, 1)='3' or SUBSTR(name, 1, 1)='4' then 1 end) as west from Campus; 
+SELECT name, dob, DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(dob, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(dob, '00-%m-%d')) AS age FROM Student HAVING age > 17 ORDER BY age DESC;
+SELECT COUNT(CASE WHEN gender='M' THEN 1 end) AS male_cnt, COUNT(CASE WHEN gender='F' THEN 1 end) AS female_cnt FROM Student WHERE DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(dob, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(dob, '00-%m-%d')) > 19;
+SELECT COUNT(*) FROM Student where math > (SELECT (avg(math)+avg(sci)+avg(eng)+avg(social)+avg(sports))/5 FROM Student);
+SELECT unique (SELECT COUNT(*) FROM Campus where SUBSTR(pincode, 1, 1)='5' or SUBSTR(pincode, 1, 1)='6') as south, (SELECT count(*) FROM Campus where SUBSTR(pincode, 1, 1)='3' or SUBSTR(pincode, 1, 1)='4') AS west FROM Campus;
 SELECT name FROM Student ORDER BY (math+sci+eng+social+sports) DESC LIMIT 1,1;
-SELECT name, rollno, (math+sci+eng+social+sports)/5 AS avg_marks, (SELECT CASE when avg_marks > (AVG(math)+AVG(sci)+AVG(eng)+AVG(social)+AVG(sports))/5 then 'High' else 'low' end FROM Student) AS score_status FROM Student;
+SELECT name, rollno, (math+sci+eng+social+sports)/5 AS avg_marks, (SELECT CASE WHEN avg_marks > (AVG(math)+AVG(sci)+AVG(eng)+AVG(social)+AVG(sports))/5 THEN 'High' else 'low' end FROM Student) AS score_status FROM Student;
