@@ -29,18 +29,18 @@ mycursor = mydb.cursor()
 
 # Changes requested in current lab for table Student
 
-mycursor.execute("alter table Student add gender char(1) default 'M';")
-mycursor.execute("alter table Student add team char(1);")
-mycursor.execute("alter table Student drop column age;")
-mycursor.execute("alter table Student add dob date;")
-mycursor.execute("alter table Student add yjoin int;")
+mycursor.execute("ALTER TABLE Student ADD gender CHAR(1) DEFAULT 'M';")
+mycursor.execute("ALTER TABLE Student ADD team CHAR(1);")
+mycursor.execute("ALTER TABLE Student DROP COLUMN age;")
+mycursor.execute("ALTER TABLE Student ADD dob DATE;")
+mycursor.execute("ALTER TABLE Student ADD yjoin INT;")
 
 
 # To display the values in the way needed
-mycursor.execute("ALTER TABLE Student MODIFY dob date AFTER rollno;")
-mycursor.execute("ALTER TABLE Student MODIFY yjoin int AFTER dob;")
-mycursor.execute("ALTER TABLE Student MODIFY gender char(1) AFTER yjoin;")
-mycursor.execute("ALTER TABLE Student MODIFY team char(1) AFTER gender;")
+mycursor.execute("ALTER TABLE Student MODIFY dob DATE AFTER rollno;")
+mycursor.execute("ALTER TABLE Student MODIFY yjoin INT AFTER dob;")
+mycursor.execute("ALTER TABLE Student MODIFY gender CHAR(1) AFTER yjoin;")
+mycursor.execute("ALTER TABLE Student MODIFY team CHAR(1) AFTER gender;")
 
 prev_students = {
 	'name': ["dwayne", "john", "dave", "randy", "kane", "tom"],
@@ -64,7 +64,7 @@ new_students = {
 	'rollnos': [7, 21, 52, 34, 46],
 	'dob': ['2000-06-19', '2001-08-10', '2001-06-19', '2001-06-19', '2001-06-19'],
 	'yjoin': [2018, 2019, 2019, 2018, 2019],
-	'team': ['w', 'R', 'A', 'G', 'G'],
+	'team': ['W', 'R', 'A', 'G', 'G'],
 	'math': [78, 42, 83, 84, 98],
 	'sci': [99, 73, 86, 93, 97],
 	'eng': [45, 59, 89, 79, 84],
@@ -93,7 +93,7 @@ mydb.commit()
 
 # Changes requested in current lab for Campus table
 
-mycursor.execute("ALTER TABLE Campus ADD pincode char(6)")
+mycursor.execute("ALTER TABLE Campus ADD pincode CHAR(6)")
 
 prev_campus = {
 	'names': ['mec', 'muc', 'mgt'],
@@ -108,7 +108,7 @@ for i in range(3):
 
 mydb.commit()
 
-mycursor.execute("ALTER TABLE Campus MODIFY pincode char(6) AFTER loc;")
+mycursor.execute("ALTER TABLE Campus MODIFY pincode CHAR(6) AFTER loc;")
 
 new_campus = {
 	'names': ['mdc', 'mdd', 'mvc', 'mbd'],
