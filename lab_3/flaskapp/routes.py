@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, request
 
 from flaskapp import app
 
@@ -10,7 +10,20 @@ def root():
 
 @app.route("/user/register", methods=['POST'])
 def add_user():
-	print(dbh.add_user('test'))
+	
+	data_keys = ['name', 'phno', 'dob']
+
+	data = request.get_json()
+
+	if(len(data.keys()) != 3):
+		return jsonify({'msg': 'Incorrect JSON format sent!'})
+
+	for key in data_keys:
+		if key not in data.keys():
+			return jsonify({'msg': 'Incorrect JSON format sent!'})
+
+	# print(dbh.add_user('test'))
+	# return jsonify(dbh.add_user(data))
 	return jsonify({"msg": "Added user!"})
 
 @app.route("/user/update", methods=['POST'])

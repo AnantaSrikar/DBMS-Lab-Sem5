@@ -4,17 +4,46 @@
 	Author: Srikar
 """
 
+# TODO: make table name dynamic
+
 from dbhandler import mycursor
 
 class dbh:
-	def add_user(username):
-		return {"msg" : f"Added {username} to the database!"}
-	
-	def update_user(username):
-		return {"msg" : f"Updated {username} to the database!"}
+	def add_user(user_data):
 
-	def delete_user(username):
-		return {"msg" : f"Deleted {username} to the database!"}
+		query = "INSERT INTO user_data VALUES ('%s', %s, STR_TO_DATE('%s', '%Y-%m-%d'));"
+		values = (user_data['name'], user_data['phno'], user_data['dob'])
+
+		mycursor.execute(query, values)
+		
+		return {"msg" : f"Added {user_data['name']} to the database!"}
+	
+	def update_user(user_data):
+		query = "UPDATE user_data SET name='%s' WHERE phno=%s;"
+		values = (user_data['name'], user_data['phno'])
+
+		mycursor.execute(query, values)
+
+		return {"msg" : f"Updated {user_data['name']} in the database!"}
+
+	def delete_user(user_data):
+
+		mycursor.execute(f"DELETE FROM user_data WHERE phno={user_data['phno']};")
+
+		return {"msg" : f"Deleted {user_data['phno']} from the database!"}
 
 	def view_users():
-		return {"msg" : "All the users in db!"}
+
+		mycursor.execute("SELECT * FROM user_data")
+
+		table_info = mycursor.fetchall()
+
+		data = {}
+
+		for row in table_info:
+			data[row[1]] = {}
+			
+			data[row[1]]['name'] = row[0]
+			data[row[1]]['dob'] = row[2]
+
+		return data
