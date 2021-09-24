@@ -1,3 +1,8 @@
+"""
+	All the routes for application
+
+	Author: Srikar
+"""
 from flask import jsonify, request
 
 from flaskapp import app
@@ -22,21 +27,32 @@ def add_user():
 		if key not in data.keys():
 			return jsonify({'msg': 'Incorrect JSON format sent!'})
 
-	# print(dbh.add_user('test'))
-	# return jsonify(dbh.add_user(data))
-	return jsonify({"msg": "Added user!"})
+	return jsonify(dbh.add_user(data))
 
 @app.route("/user/update", methods=['POST'])
 def update_user():
-	print(dbh.update_user('test'))
-	return jsonify({"msg": "Updated user!"})
+
+	data = request.get_json()
+
+	try:
+		return jsonify(dbh.update_user(data))
+	
+	except Exception as e:
+		print(e)
+		return jsonify({"msg" : "Failed to update the user!"})
 
 @app.route("/user/delete", methods=['POST'])
 def del_user():
-	print(dbh.delete_user('test'))
-	return jsonify({"msg": "Deleted user!"})
+
+	data = request.get_json()
+
+	try:
+		return jsonify(dbh.delete_user(data))
+
+	except Except as e:
+		print(e)
+		return jsonify({"msg" : "Failed to delete the user!"})
 
 @app.route("/user/view", methods=['GET'])
 def view_users():
-	print(dbh.view_users())
-	return jsonify({"msg": "See all users!"})
+	return jsonify(dbh.view_users())
