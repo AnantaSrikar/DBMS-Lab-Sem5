@@ -1,0 +1,52 @@
+-- q1 - q3
+All the creation of new tables is done in a python script (create-db.py) as its easier to handle data there
+Output of the script:
+❯ python3 create-db.py
+1 record inserted.
+1 record inserted.
+1 record inserted.
+
+-- q4
+cid is already a primary key, defined back in lab_1
+
+-- q5 a.
+MariaDB [university_profile]> ALTER TABLE Student DROP math;
+Query OK, 0 rows affected (0.040 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [university_profile]> ALTER TABLE Student DROP sci;
+Query OK, 0 rows affected (0.040 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [university_profile]> ALTER TABLE Student DROP eng;
+Query OK, 0 rows affected (0.039 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [university_profile]> ALTER TABLE Student DROP social;
+Query OK, 0 rows affected (0.041 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [university_profile]> ALTER TABLE Student DROP sports;
+Query OK, 0 rows affected (0.043 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+-- q5 b.
+MariaDB [university_profile]> ALTER TABLE Student DROP PRIMARY KEY; -- Since I used rollno as a primary key initially
+Query OK, 11 rows affected (0.072 sec)             
+Records: 11  Duplicates: 0  Warnings: 0
+
+MariaDB [university_profile]> ALTER TABLE Student ADD CONSTRAINT fk_rollno FOREIGN KEY (rollno) REFERENCES marks_sem1(rollno);
+Query OK, 11 rows affected (0.086 sec)             
+Records: 11  Duplicates: 0  Warnings: 0
+
+
+--q5 c.
+MariaDB [university_profile]> ALTER TABLE Student ADD cid INT;
+Query OK, 0 rows affected (0.041 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+NOTE: After runnign this query, run update-db.py as the data was added as asked in the assignment.
+
+--q5 d.
+MariaDB [university_profile]> ALTER TABLE Student ADD CONSTRAINT fk_cid FOREIGN KEY (cid) REFERENCES Campus(cid);
+Query OK, 11 rows affected (0.075 sec)             
+Records: 11  Duplicates: 0  Warnings: 0
