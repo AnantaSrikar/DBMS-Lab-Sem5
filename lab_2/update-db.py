@@ -112,7 +112,7 @@ mycursor.execute("ALTER TABLE Campus MODIFY pincode CHAR(6) AFTER loc;")
 
 new_campus = {
 	'names': ['mdc', 'mdd', 'mvc', 'mbd'],
-	'cid': [106, 109, 110, 11],
+	'cid': [106, 109, 110, 113],
 	'loc': ['pun', 'del', 'vel', 'bgl'],
 	'pincode': ['411021', '110001', '631001', '560002'],
 	'cap': [1700, 1400, 1400, 800],

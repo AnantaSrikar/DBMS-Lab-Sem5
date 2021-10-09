@@ -44,30 +44,14 @@ def connectDB(dbName):
 	)
 	return mydb
 
-hasDB = False
-
 # Try to connect to university_profile
 try:
 	mydb = connectDB("university_profile")
-	hasDB = True
 
-# Database doesn't exist, make one
 except mysql.connector.errors.ProgrammingError:
-	mydb = mysql.connector.connect(
-		host="localhost",
-		user=getuser(),
-		password=f"{os.environ['SQL_P']}"
-		)
-
-	mycursor = mydb.cursor()
-
-	mycursor.execute("CREATE DATABASE university_profile")
+	print("DB not existing, run previous scripts to make one :)")
 
 mycursor = mydb.cursor()
-
-# Connect to db if not connected
-if not hasDB:
-	mycursor.execute("USE university_profile")
 
 mycursor.execute("""CREATE TABLE IF NOT EXISTS marks_sem1 (
 	rollno INT NOT NULL PRIMARY KEY,
