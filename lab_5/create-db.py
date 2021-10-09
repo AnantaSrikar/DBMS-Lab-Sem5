@@ -80,7 +80,7 @@ mycursor.execute("""CREATE TABLE IF NOT EXISTS marks_sem1 (
 	""")
 
 try:
-	for i in range(6):
+	for i in range(len(marks_sem1['rollnos'])):
 		query = "INSERT INTO marks_sem1 VALUES (%s, %s, %s, %s, %s, %s);"
 		values = (marks_sem1['rollnos'][i], marks_sem1['math'][i], marks_sem1['sci'][i], marks_sem1['eng'][i], marks_sem1['social'][i], marks_sem1['sports'][i])
 		mycursor.execute(query, values)
@@ -103,7 +103,7 @@ mycursor.execute("""CREATE TABLE IF NOT EXISTS faculty (
 	""")
 
 try:
-	for i in range(3):
+	for i in range(len(faculty['names'])):
 		query = "INSERT INTO faculty VALUES (%s, %s, %s);"
 		values = (faculty['names'][i], faculty['fid'][i], faculty['subject'][i])
 		mycursor.execute(query, values)
@@ -130,7 +130,7 @@ mycursor.execute("""CREATE TABLE IF NOT EXISTS sem1 (
 	""")
 
 try:
-	for i in range(3):
+	for i in range(len(sem1['subj_id'])):
 		query = "INSERT INTO sem1 VALUES (%s, %s, %s, %s, %s);"
 		values = (sem1['subj_id'][i], sem1['subject'][i], sem1['fid'][i], sem1['cap'][i], sem1['campus'][i])
 		mycursor.execute(query, values)
