@@ -90,14 +90,14 @@ try:
 	
 
 except mysql.connector.errors.IntegrityError:
-	print("Looks like you already created the table")
+	print("Looks like you already created the table marks_sem1")
 
 except Exception as e:
 	print(f"Something bad happened :( => {e}")
 
 mycursor.execute("""CREATE TABLE IF NOT EXISTS faculty (
 	name VARCHAR(20),
-	fid CHAR(4) NOT NULLPRIMARY KEY,
+	fid CHAR(4) NOT NULL PRIMARY KEY,
 	subject VARCHAR(20)
 	);
 	""")
@@ -117,25 +117,29 @@ except mysql.connector.errors.IntegrityError:
 except Exception as e:
 	print(f"Something bad happened :( => {e}")
 
-
+# Check for candidate keys
 mycursor.execute("""CREATE TABLE IF NOT EXISTS sem1 (
-	name VARCHAR(20),
-	fid CHAR(4) NOT NULLPRIMARY KEY,
-	subject VARCHAR(20)
+	subj_id CHAR(4) NOT NULL PRIMARY KEY,
+	subject VARCHAR(20),
+	fid CHAR(4),
+	cap INT,
+	campus INT,
+	CONSTRAINT fk_fid FOREIGN KEY (fid) REFERENCES faculty(fid),
+	CONSTRAINT fk_campus FOREIGN KEY (campus) REFERENCES Campus(cid)
 	);
 	""")
 
 try:
 	for i in range(3):
-		query = "INSERT INTO faculty VALUES (%s, %s, %s);"
-		values = (faculty['names'][i], faculty['fid'][i], faculty['subject'][i])
+		query = "INSERT INTO sem1 VALUES (%s, %s, %s, %s, %s);"
+		values = (sem1['subj_id'][i], sem1['subject'][i], sem1['fid'][i], sem1['cap'][i], sem1['campus'][i])
 		mycursor.execute(query, values)
 
 	mydb.commit()
 	print(mycursor.rowcount, "record inserted.")
 
 except mysql.connector.errors.IntegrityError:
-	print("Looks like you already created the table faculty")
+	print("Looks like you already created the table sem1!")
 
 except Exception as e:
 	print(f"Something bad happened :( => {e}")
