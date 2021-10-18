@@ -48,3 +48,7 @@
 | jean    |   98 |     46 |
 +---------+------+--------+
 8 rows in set (0.001 sec)
+
+-- q4
+Diff: 1 extra row in RIGHT JOIN
+| NULL    |   NULL | NULL       |  NULL | NULL   | NULL | NULL | mdc  | 106 | pun  | 411021  | 1700 |    0 |    1 |    1 |
